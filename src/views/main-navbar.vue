@@ -2,8 +2,8 @@
   <nav class="site-navbar" :class="'site-navbar--' + navbarLayoutType">
     <div class="site-navbar__header">
       <h1 class="site-navbar__brand" @click="$router.push({ name: 'home' })">
-        <a class="site-navbar__brand-lg" href="javascript:;">人人快速开发平台</a>
-        <a class="site-navbar__brand-mini" href="javascript:;">人人</a>
+        <a class="site-navbar__brand-lg" href="javascript:;">新谷粒商城</a>
+        <a class="site-navbar__brand-mini" href="javascript:;">新谷粒商城</a>
       </h1>
     </div>
     <div class="site-navbar__body clearfix">
@@ -29,12 +29,6 @@
             <a href="https://www.renren.io/" target="_blank">官方社区</a>
           </el-badge>
         </el-menu-item>
-        <el-submenu index="3">
-          <template slot="title">Git源码</template>
-          <el-menu-item index="2-1"><a href="https://github.com/renrenio/renren-fast-vue" target="_blank">前端</a></el-menu-item>
-          <el-menu-item index="2-2"><a href="https://gitee.com/renrenio/renren-fast" target="_blank">后台</a></el-menu-item>
-          <el-menu-item index="2-3"><a href="https://gitee.com/renrenio/renren-generator" target="_blank">代码生成器</a></el-menu-item>
-        </el-submenu>
         <el-menu-item class="site-navbar__avatar" index="3">
           <el-dropdown :show-timeout="0" placement="bottom">
             <span class="el-dropdown-link">
@@ -55,9 +49,10 @@
 
 <script>
   import UpdatePassword from './main-navbar-update-password'
-  import { clearLoginInfo } from '@/utils'
+  import {clearLoginInfo} from '@/utils'
+
   export default {
-    data () {
+    data() {
       return {
         updatePassowrdVisible: false
       }
@@ -67,30 +62,42 @@
     },
     computed: {
       navbarLayoutType: {
-        get () { return this.$store.state.common.navbarLayoutType }
+        get() {
+          return this.$store.state.common.navbarLayoutType
+        }
       },
       sidebarFold: {
-        get () { return this.$store.state.common.sidebarFold },
-        set (val) { this.$store.commit('common/updateSidebarFold', val) }
+        get() {
+          return this.$store.state.common.sidebarFold
+        },
+        set(val) {
+          this.$store.commit('common/updateSidebarFold', val)
+        }
       },
       mainTabs: {
-        get () { return this.$store.state.common.mainTabs },
-        set (val) { this.$store.commit('common/updateMainTabs', val) }
+        get() {
+          return this.$store.state.common.mainTabs
+        },
+        set(val) {
+          this.$store.commit('common/updateMainTabs', val)
+        }
       },
       userName: {
-        get () { return this.$store.state.user.name }
+        get() {
+          return this.$store.state.user.name
+        }
       }
     },
     methods: {
       // 修改密码
-      updatePasswordHandle () {
+      updatePasswordHandle() {
         this.updatePassowrdVisible = true
         this.$nextTick(() => {
           this.$refs.updatePassowrd.init()
         })
       },
       // 退出
-      logoutHandle () {
+      logoutHandle() {
         this.$confirm(`确定进行[退出]操作?`, '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -103,10 +110,11 @@
           }).then(({data}) => {
             if (data && data.code === 0) {
               clearLoginInfo()
-              this.$router.push({ name: 'login' })
+              this.$router.push({name: 'login'})
             }
           })
-        }).catch(() => {})
+        }).catch(() => {
+        })
       }
     }
   }
